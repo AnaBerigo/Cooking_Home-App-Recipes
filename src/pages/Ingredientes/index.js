@@ -56,8 +56,6 @@ export default function Ingredientes() {
   );
 
   function inserirItem(item) {
-    //console.log(item);
-
     if (newItem.includes(item)) {
       newItem.splice(newItem.indexOf(item), 1);
     } else {
@@ -139,10 +137,10 @@ export default function Ingredientes() {
               onPress={() =>
                 navigation.navigate("IngredienteEspecifico", newItem)
               }
-              style={styles.botaoCadastrar}
+              style={styles.botao}
             >
               {console.log(newItem)}
-              <Text style={styles.btnTextoCadastrar}>Mostrar Receitas</Text>
+              <Text style={styles.btnTexto}>Mostrar Receitas</Text>
             </TouchableOpacity>
           </View>
           <FlatList
@@ -171,13 +169,12 @@ const styles = StyleSheet.create({
     marginBottom: "3%",
     marginHorizontal: "5%",
     paddingVertical: "2%",
-    //flex: 1,
     backgroundColor: "rgba(255, 255, 255, 1)",
     borderRadius: 10,
     borderColor: "#F86E10",
     borderWidth: 2,
   },
-  botaoCadastrar: {
+  botao: {
     alignSelf: "center",
     justifyContent: "center",
     width: tela * 0.7,
@@ -191,7 +188,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     marginTop: "1%",
   },
-  btnTextoCadastrar: {
+  btnTexto: {
     textAlign: "center",
     fontSize: 18,
     color: "#ffffff",
@@ -210,6 +207,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   tituloArray: {
+    marginLeft: 5,
     fontFamily: fonts.semibold,
     color: "#7CB518",
     textAlign: "center",
