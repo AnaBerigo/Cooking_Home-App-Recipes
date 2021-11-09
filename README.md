@@ -33,7 +33,7 @@
 
 <h2>Sobre</h2>
 Essa é uma aplicação desenvolvida com o objetivo de apresentar para o meu TCC, além de aperfeiçoar os conhecimentos em React Native.<br>
-O intuito desse projeto é de mostrar receitas postadas por outros usuários, criar suas próprias receitas e filtrar ingredientes disponíveis em casa.<br>
+O intuito desse projeto é de mostrar as receitas do próprio aplicativo, criar suas próprias receitas e filtrar ingredientes<br>
 
 <!-- Protótipo do figma -->
 
@@ -60,6 +60,15 @@ O intuito desse projeto é de mostrar receitas postadas por outros usuários, cr
 
 <!-- Bibliotecas -->
 
+<!-- Ambiente Windows -->
+<h2>Configurando o ambiente React Native no Windows</h2>
+https://sujeitoprogramador.com/ambiente-windows/
+
+<!-- Expo -->
+<h2>Instalando o Expo</h2>
+<code>npm install --global expo-cli</code>
+
+<!-- Bibliotecas -->
 <h2>Bibliotecas Utilizadas</h2>
 Será necessário instalar as seguintes bibliotecas no computador/projeto, para que o código rode corretamente:<br/><br/>
   <code> expo install @expo-google-fonts/quicksand expo-font</code><br/>
@@ -102,5 +111,4 @@ Será necessário instalar as seguintes bibliotecas no computador/projeto, para 
 <p align="center">
   <img alt="Cores" src="https://user-images.githubusercontent.com/74029212/126877549-66102de2-8cf6-4c52-9b23-ddbd440e2985.png" />
 </p>
-
 
