@@ -5,6 +5,10 @@
 <h1 align="center"> CookingHome_Expo </h1>
 
 <!-- Imagens/GIF do APP -->
+<p align="center">
+  <img alt="QrCode_CookingHome" src="https://user-images.githubusercontent.com/74029212/142224321-d0763733-7b8b-4e10-9398-d7434f18396e.png" />
+</p>
+
 
 <!-- Imagens das Ferramentas/Frameworks utilizados -->
 
@@ -28,7 +32,11 @@
     <img alt="EXPO" height=27 src="https://img.shields.io/badge/%20Expo-4630EB.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000" />
   </a>
 </p>
-
+<!-- 
+<p align="center">
+  <img alt="QrCode_CookingHome" src="https://user-images.githubusercontent.com/74029212/142224321-d0763733-7b8b-4e10-9398-d7434f18396e.png" />
+</p>
+-->
 <!-- Sobre o projeto -->
 
 <h2>Sobre</h2>
