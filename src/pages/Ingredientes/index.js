@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ImageBackground,
   SafeAreaView,
@@ -24,15 +24,9 @@ const tela = Dimensions.get("window").width;
 export default function Ingredientes() {
   const navigation = useNavigation();
 
-  /*  const renderIngredient = ({ item }) => (
-    <TouchableOpacity
-      style={styles.containerIng}
-      onPress={() => navigation.navigate("IngredienteEspecifico", { item })}
-    >
-      <Image style={styles.imagem} source={{ uri: item.imagem }} />
-      <Text style={styles.titulo}>{item.nome}</Text>
-    </TouchableOpacity>
-  );*/
+  const [newItem, setNewItem] = useState([]);
+  const [pesquisa, setPesquisa] = useState("");
+  const [list, setList] = useState(ingredientes);
 
   const renderIngredient = ({ item }) => (
     <TouchableOpacity
@@ -45,57 +39,38 @@ export default function Ingredientes() {
   );
 
   const renderArrayIngredient = ({ item }) => (
-    <View style={styles.containerArrayIng}>
+    <TouchableOpacity
+      style={styles.containerArrayIng}
+      onPress={() => removerItem(item)}
+    >
       <MaterialCommunityIcons
         name="checkbox-marked-outline"
         size={25}
         color="#F86E10"
       />
       <Text style={styles.tituloArray}>{item.nome}</Text>
-    </View>
+    </TouchableOpacity>
   );
+  /*
+  
+  */
 
-  function inserirItem(item) {
+  function removerItem(item) {
     if (newItem.includes(item)) {
       newItem.splice(newItem.indexOf(item), 1);
-    } else {
-      setNewItem((oldArray) => [...oldArray, item]);
     }
 
-    /*newItem.filter((data, i) => {
-      console.log("entrei");
-      newItem.indexOf(data) === i;
-    });
-
-    newItem.find(() => {
-      console.log("entrei1");
-      if (newItem != null) {
-        newItem = (oldArray) => [...oldArray, item];
-      }
-    });
-
-     if (ingredienteId === item.ingredienteId) {
-      return;
-    } else {
-      setIngID((oldArray) => [...oldArray, item.ingredienteId]);
-      setNewItem((oldArray) => [...oldArray, item]);
-    }
-
-    newItem.forEach((i) => {
-      if (i == null || i.ingredienteId != item.ingredienteId) {
-        setNewItem((oldArray) => [...oldArray, item]);
-      } else {
-        newItem.splice(i.ingredienteId, 1);
-      }
-    });*/
-
-    //setNewItem((oldArray) => [...oldArray, item]);
-
-    console.log(newItem);
+    //console.log(newItem);
   }
-  const [newItem, setNewItem] = useState([]);
-  const [pesquisa, setPesquisa] = useState("");
-  const [list, setList] = useState(ingredientes);
+
+  function inserirItem(item) {
+    if (!newItem.includes(item)) {
+      setNewItem([...newItem, item]);
+      //newItem.push(item);
+      //console.log(newItem);
+    }
+    //console.log("adicionei");
+  }
 
   useEffect(() => {
     if (pesquisa === "") {
@@ -111,54 +86,66 @@ export default function Ingredientes() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
-        <View>
-          <IconMenu />
+      <ImageBackground
+        style={styles.imgFundo}
+        source={require("../../img/FundoIng.png")}
+      >
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
+          <View>
+            <IconMenu />
 
-          <View style={styles.pesquisa}>
-            <TextInput
-              placeholder={"Qual(is) ingrediente(s) deseja?"}
-              autoCorrect={true}
-              textContentType={"name"}
-              value={pesquisa}
-              onChangeText={(texto) => setPesquisa(texto)}
-              style={styles.input}
-            />
-          </View>
-          <View style={styles.ArrayIng}>
+            <View style={styles.pesquisa}>
+              <TextInput
+                placeholder={"Qual(is) ingrediente(s) deseja?"}
+                autoCorrect={true}
+                textContentType={"name"}
+                value={pesquisa}
+                onChangeText={(texto) => setPesquisa(texto)}
+                style={styles.input}
+              />
+            </View>
+            <View style={styles.ArrayIng}>
+              <FlatList
+                showsVerticalScrollIndicator={false}
+                numColumns={2}
+                data={newItem}
+                renderItem={renderArrayIngredient}
+              />
+              <View
+                style={{ flexDirection: "row", justifyContent: "space-around" }}
+              >
+                <TouchableOpacity
+                  onPress={() => setNewItem([])}
+                  style={styles.botao}
+                >
+                  <Text style={styles.btnTexto}>Limpar Lista</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("IngredienteEspecifico", newItem)
+                  }
+                  style={styles.botao}
+                >
+                  <Text style={styles.btnTexto}>Mostrar Receitas</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
             <FlatList
+              style={styles.FlatIng}
               showsVerticalScrollIndicator={false}
-              numColumns={2}
-              data={newItem}
-              renderItem={renderArrayIngredient}
+              numColumns={3}
+              data={list}
+              renderItem={renderIngredient}
               keyExtractor={(item) => String(item.ingredienteId)}
             />
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("IngredienteEspecifico", newItem)
-              }
-              style={styles.botao}
-            >
-              {console.log(newItem)}
-              <Text style={styles.btnTexto}>Mostrar Receitas</Text>
-            </TouchableOpacity>
           </View>
-          <FlatList
-            style={styles.FlatIng}
-            showsVerticalScrollIndicator={false}
-            numColumns={3}
-            data={list}
-            renderItem={renderIngredient}
-            keyExtractor={(item) => String(item.ingredienteId)}
-          />
-        </View>
-      </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "rgba(124, 181, 24, 0.15)",
     flex: 1,
   },
   imgFundo: {
@@ -169,18 +156,19 @@ const styles = StyleSheet.create({
     marginBottom: "3%",
     marginHorizontal: "5%",
     paddingVertical: "2%",
-    backgroundColor: "rgba(255, 255, 255, 1)",
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
     borderRadius: 10,
     borderColor: "#F86E10",
     borderWidth: 2,
   },
   botao: {
-    alignSelf: "center",
+    //alignSelf: "center",
     justifyContent: "center",
-    width: tela * 0.7,
+    width: tela * 0.4,
     height: tela * 0.15,
+    padding: "2%",
     backgroundColor: "#F86E10",
-    borderRadius: 15,
+    borderRadius: 10,
     shadowColor: "#000000",
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.4,
@@ -197,8 +185,8 @@ const styles = StyleSheet.create({
   FlatIng: {
     borderRadius: 55,
     marginHorizontal: "2%",
-    backgroundColor: "rgba(255, 255, 255, 1)",
-    marginBottom: "3%",
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    marginBottom: "10%",
     paddingVertical: "2%",
   },
   titulo: {

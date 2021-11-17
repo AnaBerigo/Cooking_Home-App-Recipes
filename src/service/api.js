@@ -4,16 +4,23 @@ import { receitas, ingredientes } from "./receitas";
 export const TOGGLE_FAVORITE = "TOGGLE_FAVORITE";
 
 export function getArraysIngredientes(ingredientes) {
+  let qntIngsEncontrados = 0;
   let receitasEncontradas = [];
 
   receitas.forEach((receita) => {
+    qntIngsEncontrados = 0;
     let ingredientesDaReceita = receita.ingredientes;
-    let filterByIngredienteTag = new Set(ingredientes);
+    ingredientesDaReceita.forEach((ings) => {
+      ingredientes.forEach((ingrediente) => {
+        if (ings[0] == ingrediente.ingredienteId) {
+          qntIngsEncontrados++;
+        }
+      });
+    });
 
-    let result = ingredientesDaReceita.filter((ings) =>
-      ings.some((ingrediente) => filterByIngredienteTag.has(ingrediente))
-    );
-    receitasEncontradas.push(result);
+    if (qntIngsEncontrados == ingredientes.length) {
+      receitasEncontradas.push(receita);
+    }
   });
   return receitasEncontradas;
 }

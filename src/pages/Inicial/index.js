@@ -7,10 +7,12 @@ import {
   Image,
   ImageBackground,
   SafeAreaView,
-  ScrollView,
+  Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import fonts from "../../assets/fonts/fonts";
+const tela = Dimensions.get("window").width;
+const telaH = Dimensions.get("window").height;
 
 export default function Inicial() {
   const navigation = useNavigation();
@@ -19,49 +21,43 @@ export default function Inicial() {
     <SafeAreaView style={styles.container}>
       <ImageBackground
         style={styles.imgFundo}
-        source={require("../../img/FundoVerde.png")}
+        source={require("../../img/FundoVerdeClaro.png")}
       >
-        <ScrollView>
-          <View style={styles.containerCentro}>
-            <View style={styles.containerCentroRow}>
+        <View style={styles.containerCentro}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <View style={styles.containerImg}>
               <Image
                 style={styles.img}
-                source={require("../../img/Passionate-cuate.png")}
+                source={require("../../img/Passionate-cuate1.png")}
               />
-              {/* https://storyset.com/illustration/passionate/cuate#F86E10FF&hide=&hide=complete */}
-              <View style={styles.containerTexto}>
-                <Image
-                  style={styles.logo}
-                  source={require("../../img/Logo.png")}
-                />
-                <Text style={styles.texto}>
-                  Bem-vindo ao CookingHome, seu aplicativo de receitas.
-                </Text>
-              </View>
             </View>
-
-            <View style={styles.btnView}>
-              <TouchableOpacity
-                style={styles.botaoCadastro}
-                onPress={() => navigation.navigate("SignUp")}
-              >
-                <View style={styles.btnAreaCadastro}>
-                  <Text style={styles.btnTextoCadastro}>Sou Novo</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.btnView}>
-              <TouchableOpacity
-                style={styles.botaoLogin}
-                onPress={() => navigation.navigate("SignIn")}
-              >
-                <View style={styles.btnAreaLogin}>
-                  <Text style={styles.btnTextoLogin}>Já Tenho Conta</Text>
-                </View>
-              </TouchableOpacity>
+            <View style={styles.containerTexto}>
+              <Text style={styles.texto}>
+                Bem-vindo ao CookingHome, seu aplicativo de receitas.
+              </Text>
             </View>
           </View>
-        </ScrollView>
+
+          <TouchableOpacity
+            style={styles.botaoCadastro}
+            onPress={() => navigation.navigate("SignUp")}
+          >
+            <Text style={styles.btnTextoCadastro}>Sou Novo</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.botaoLogin}
+            onPress={() => navigation.navigate("SignIn")}
+          >
+            <Text style={styles.btnTextoLogin}>Já Tenho Conta</Text>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -76,88 +72,65 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   containerCentro: {
+    alignSelf: "center",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     borderRadius: 20,
-    width: "95%",
-    height: "85%",
-    padding: "10%",
-    marginHorizontal: "2.5%",
-    marginTop: "25%",
-  },
-  containerCentroRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    width: tela * 0.95,
+    flex: 1,
+    marginVertical: "25%",
   },
   img: {
-    width: "90%",
-    height: 360,
-    marginBottom: "-10%",
-    marginTop: "-15%",
+    width: tela * 0.6,
+    height: telaH * 0.385,
     zIndex: 1,
-  },
-  logo: {
-    width: "55%",
-    height: "27%",
-  },
-  containerTexto: {
-    marginLeft: "-45%",
-    marginBottom: "10%",
-    alignItems: "flex-end",
-    justifyContent: "flex-end",
-    width: "60%",
-    height: "30%",
-    zIndex: 9,
   },
   texto: {
     textAlign: "right",
-    fontSize: 12,
+    fontSize: tela * 0.038,
     fontFamily: fonts.medium,
   },
-  btnView: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+  containerTexto: {
+    marginTop: "20%",
+    width: tela * 0.4,
+    height: telaH * 0.2,
+    zIndex: 9,
+    marginLeft: "-40%",
+  },
+  containerImg: {
+    width: tela * 0.8,
+    height: telaH * 0.385,
+    marginLeft: "-12%",
   },
   botaoCadastro: {
-    width: 271,
-    height: 56,
-    borderWidth: 2,
+    alignItems: "center",
+    justifyContent: "center",
+    width: tela * 0.7,
+    height: telaH * 0.09,
     backgroundColor: "#F86E10",
-    borderColor: "#F86E10",
     borderRadius: 15,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
-  },
-  btnAreaCadastro: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    elevation: 4,
+    marginTop: 12,
   },
   btnTextoCadastro: {
-    fontSize: 18,
+    fontSize: tela * 0.054,
     color: "#fff",
     fontFamily: fonts.bold,
   },
   botaoLogin: {
-    marginTop: 12,
-    width: 271,
-    height: 25,
-    borderWidth: 2,
-    borderColor: "#fff",
-  },
-  btnAreaLogin: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 15,
+    width: tela * 0.7,
   },
   btnTextoLogin: {
-    fontSize: 18,
+    fontSize: tela * 0.054,
     color: "#F86E10",
     fontFamily: fonts.bold,
   },

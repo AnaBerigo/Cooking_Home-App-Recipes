@@ -16,21 +16,19 @@ import {
 } from "react-native";
 import fonts from "../../assets/fonts/fonts";
 import { AuthContext } from "../../contexts/auth";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import firebase from "../../service/firebaseConnection";
 import { useNavigation } from "@react-navigation/native";
-import Header from "../../component/Header";
+import IconMenu from "../../component/IconMenu";
 import { format } from "date-fns";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
-import Axios from "axios";
 const tela = Dimensions.get("window").width;
 
 export default function CriarReceita() {
   const navigation = useNavigation();
   const imagem =
-    "https://user-images.githubusercontent.com/74029212/138168360-ba1b0f19-ac68-42cb-b4cc-3cd926b9976c.png";
+    "https://user-images.githubusercontent.com/74029212/142089632-d8baef95-e4eb-4cec-92c5-1b202749e67e.png";
   const [ingredientes, setIngredientes] = useState("");
   const [avatar, setAvatar] = useState();
   const [modoPreparo, setModoPreparo] = useState("");
@@ -135,7 +133,7 @@ export default function CriarReceita() {
           style={styles.imgFundo}
           source={require("../../img/FundoFolha.png")}
         >
-          <Header />
+          <IconMenu />
           <ScrollView>
             <TouchableOpacity
               style={styles.btnCamera}
@@ -145,25 +143,22 @@ export default function CriarReceita() {
                 source={{
                   uri: avatar
                     ? avatar.uri
-                    : "https://user-images.githubusercontent.com/74029212/138168360-ba1b0f19-ac68-42cb-b4cc-3cd926b9976c.png",
+                    : "https://user-images.githubusercontent.com/74029212/142089632-d8baef95-e4eb-4cec-92c5-1b202749e67e.png",
                 }}
                 style={styles.avatar}
               />
             </TouchableOpacity>
             <View style={styles.containerReceitas}>
-              <View style={styles.viewIngredientes}>
-                <Text style={styles.textIngredientes}>NOME DA RECEITA</Text>
-              </View>
+              <Text style={styles.titulo}>Criar Receita</Text>
               <TextInput
+                placeholder={"Nome da receita"}
                 autoCorrect={true}
                 value={nomeReceita}
                 onChangeText={(text) => setNomeReceita(text)}
                 style={styles.inputPequeno}
               />
-              <View style={styles.viewIngredientes}>
-                <Text style={styles.textIngredientes}>INGREDIENTES</Text>
-              </View>
               <TextInput
+                placeholder={"Ingredientes"}
                 multiline={true}
                 autoCorrect={true}
                 value={ingredientes}
@@ -171,11 +166,8 @@ export default function CriarReceita() {
                 onChangeText={(text) => setIngredientes(text)}
                 style={styles.inputGrande}
               />
-
-              <View style={styles.viewIngredientes}>
-                <Text style={styles.textIngredientes}>MODO DE PREPARO</Text>
-              </View>
               <TextInput
+                placeholder={"Modo de preparo"}
                 multiline={true}
                 autoCorrect={true}
                 value={modoPreparo}
@@ -183,27 +175,19 @@ export default function CriarReceita() {
                 onChangeText={(text) => setModoPreparo(text)}
                 style={styles.inputGrande}
               />
-              <View style={styles.viewIngredientes}>
-                <Text style={styles.textIngredientes}>TEMPO DE PREPARO</Text>
-              </View>
               <TextInput
+                placeholder={"Tempo de preparo"}
                 autoCorrect={true}
                 value={tempoPreparo}
                 onChangeText={(text) => setTempoPreparo(text)}
                 style={styles.inputPequeno}
               />
-              <View style={styles.btnView}>
-                <TouchableOpacity
-                  style={styles.botaoCadastrar}
-                  onPress={handleSubmit}
-                >
-                  <View style={styles.btnAreaCadastrar}>
-                    <Text style={styles.btnTextoCadastrar}>
-                      Finalizar Receita
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity
+                style={styles.botaoCadastrar}
+                onPress={handleSubmit}
+              >
+                <Text style={styles.btnTextoCadastrar}>Finalizar Receita</Text>
+              </TouchableOpacity>
             </View>
           </ScrollView>
         </ImageBackground>
@@ -219,7 +203,6 @@ const styles = StyleSheet.create({
   imgFundo: {
     flex: 1,
     resizeMode: "cover",
-    zIndex: 1,
   },
   containerReceitas: {
     flex: 1,
@@ -228,39 +211,33 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: "rgba(255, 255, 255, 0.4)",
   },
-  viewIngredientes: {
-    backgroundColor: "#7CB518",
-    marginTop: "7%",
-    width: 190,
-    height: 50,
-    elevation: 5,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  textIngredientes: {
-    color: "#ffffff",
+  titulo: {
+    fontSize: tela * 0.07,
+    marginTop: "10%",
+    marginBottom: "10%",
     fontFamily: fonts.bold,
+    color: "#F86E10",
+    paddingVertical: 10,
+    paddingHorizontal: 10,
     textAlign: "center",
-    fontSize: 17,
+    width: tela * 0.5,
   },
   inputPequeno: {
     borderRadius: 5,
     marginTop: "7%",
-    marginLeft: "8%",
     borderColor: "#F86E10",
     borderWidth: 1.5,
     marginVertical: 10,
     backgroundColor: "#ffffff",
     fontSize: 16,
     fontFamily: fonts.medium,
-    width: "85%",
+    width: tela * 0.85,
     height: 50,
     color: "#F86E10",
     paddingHorizontal: 10,
   },
   inputGrande: {
     marginTop: "7%",
-    marginLeft: "8%",
     borderRadius: 5,
     borderColor: "#F86E10",
     borderWidth: 1.5,
@@ -268,17 +245,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     fontSize: 16,
     fontFamily: fonts.medium,
-    width: "85%",
+    width: tela * 0.85,
     height: 80,
     color: "#F86E10",
     paddingHorizontal: 10,
   },
-  camera: {
-    flex: 1,
-  },
   btnCamera: {
     position: "absolute",
-    top: "2%",
+    top: "7%",
     right: "6%",
     flexDirection: "row",
     justifyContent: "space-around",
@@ -291,44 +265,31 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     zIndex: 1,
   },
-  cameraTexto: {
-    fontSize: 18,
-    color: "#95C346",
-    fontFamily: fonts.bold,
-  },
   avatar: {
-    width: tela * 0.28,
-    height: tela * 0.28,
-    borderRadius: 5,
-  },
-  btnView: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
     marginTop: "10%",
-    marginBottom: "10%",
+    marginLeft: "10%",
+    width: tela * 0.23,
+    height: tela * 0.23,
   },
   botaoCadastrar: {
-    width: "85%",
-    height: 56,
-    borderWidth: 1.5,
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
-    borderColor: "#F86E10",
-    borderRadius: 15,
-    shadowColor: "#000",
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 7,
-  },
-  btnAreaCadastrar: {
-    flex: 1,
+    alignSelf: "center",
     justifyContent: "center",
-    alignItems: "center",
+    width: tela * 0.7,
+    height: tela * 0.15,
+    backgroundColor: "#F86E10",
+    borderRadius: 15,
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    elevation: 5,
+    marginTop: "10%",
+    marginBottom: "20%",
   },
   btnTextoCadastrar: {
-    fontSize: 18,
-    color: "#F86E10",
+    textAlign: "center",
+    fontSize: tela * 0.045,
+    color: "#ffffff",
     fontFamily: fonts.bold,
   },
 });

@@ -4,24 +4,19 @@ import {
   TextInput,
   SafeAreaView,
   StyleSheet,
-  TouchableOpacity,
   Keyboard,
-  Text,
-  Image,
   FlatList,
   ImageBackground,
   Dimensions,
   TouchableWithoutFeedback,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import fonts from "../../assets/fonts/fonts";
 import Header from "../../component/Header";
-import { getReceitasPorNome } from "../../service/api";
 import { receitas } from "../../service/receitas";
 import ReceitasMiniatura from "../../component/ReceitasMiniatura";
 const tela = Dimensions.get("window").width;
 
-export default function Pesquisa() {
+export default function ReceitasApp() {
   const [pesquisa, setPesquisa] = useState("");
   const [list, setList] = useState(receitas);
 
@@ -45,16 +40,14 @@ export default function Pesquisa() {
           source={require("../../img/FundoFolha.png")}
         >
           <Header />
-          <View style={styles.pesquisa}>
-            <TextInput
-              placeholder={"O que deseja pesquisar?"}
-              autoCorrect={true}
-              textContentType={"name"}
-              value={pesquisa}
-              onChangeText={(texto) => setPesquisa(texto)}
-              style={styles.input}
-            />
-          </View>
+          <TextInput
+            placeholder={"O que deseja pesquisar?"}
+            autoCorrect={true}
+            textContentType={"name"}
+            value={pesquisa}
+            onChangeText={(texto) => setPesquisa(texto)}
+            style={styles.pesquisa}
+          />
           <FlatList
             showsVerticalScrollIndicator={false}
             numColumns={2}
@@ -77,23 +70,16 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   pesquisa: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    flexDirection: "row",
-    width: "90%",
+    alignSelf: "center",
+    width: tela * 0.85,
+    height: tela * 0.13,
     borderRadius: 10,
-    height: 50,
     borderWidth: 2,
     borderColor: "#F86E10",
-    marginHorizontal: "5%",
     marginVertical: "3%",
-  },
-  input: {
-    fontSize: 16,
+    paddingHorizontal: "3%",
+    fontSize: tela * 0.045,
     fontFamily: fonts.medium,
-    width: "85%",
-    height: 50,
     color: "#333333",
   },
 });

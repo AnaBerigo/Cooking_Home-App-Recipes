@@ -130,13 +130,13 @@ export default function SignUp() {
                   {ocultar ? (
                     <MaterialCommunityIcons
                       name="eye"
-                      size={25}
+                      size={tela * 0.06}
                       color="#F86E10"
                     />
                   ) : (
                     <MaterialCommunityIcons
                       name="eye-off"
-                      size={25}
+                      size={tela * 0.06}
                       color="#F86E10"
                     />
                   )}
@@ -145,7 +145,6 @@ export default function SignUp() {
             </View>
             <Text style={styles.textoSexo}>Selecione o sexo:</Text>
             <Picker
-              mode="dropdown"
               style={styles.picker}
               selectedValue={sexoSelecionado}
               onValueChange={(itemValue, itemIndex) =>
@@ -179,42 +178,43 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   textoInformativo: {
+    alignSelf: "center",
     marginTop: "20%",
-    marginHorizontal: "5%",
+    marginHorizontal: tela * 0.1,
     marginBottom: "10%",
     fontFamily: fonts.bold,
-    fontSize: 22,
+    fontSize: tela * 0.055,
     color: "#333333",
   },
   containerInformacoes: {
-    marginHorizontal: tela * 0.12,
+    marginHorizontal: tela * 0.1,
     height: telaH * 0.7,
   },
   textoInput: {
     color: "#9F9F9F",
-    fontSize: 16,
+    fontSize: tela * 0.038,
     fontFamily: fonts.bold,
   },
   input: {
     color: "#333333",
     width: tela * 0.77,
     borderBottomColor: "#9F9F9F",
-    height: "8%",
+    height: tela * 0.1,
     borderBottomWidth: 1,
-    fontSize: 16,
+    fontSize: tela * 0.038,
     fontFamily: fonts.medium,
-    marginBottom: "10%",
+    marginBottom: "5%",
   },
   areaInputSenha: {
     flexDirection: "row",
-    height: "8%",
+    height: tela * 0.1,
   },
   inputSenha: {
     width: tela * 0.7,
     color: "#333333",
     borderBottomColor: "#9F9F9F",
     borderBottomWidth: 1,
-    fontSize: 16,
+    fontSize: tela * 0.038,
     fontFamily: fonts.medium,
   },
   iconView: {
@@ -226,17 +226,16 @@ const styles = StyleSheet.create({
   textoSexo: {
     marginTop: 20,
     color: "#9F9F9F",
-    fontSize: 16,
+    fontSize: tela * 0.038,
     fontFamily: fonts.bold,
   },
   picker: {
     width: tela * 0.8,
-    height: Platform.OS == "ios" ? tela * 0.5 : tela * 0.1,
-    transform: [{ scaleX: 1.0 }, { scaleY: 1.0 }],
+    height: Platform.OS == "ios" ? tela * 0.38 : tela * 0.1,
+    marginTop: Platform.OS == "ios" ? tela * -0.05 : tela * 0.02,
+    marginBottom: Platform.OS == "ios" ? tela * 0.05 : tela * 0.1,
     color: "#333333",
     alignSelf: "center",
-    fontSize: 16,
-    fontFamily: fonts.medium,
   },
   botaoCadastrar: {
     alignSelf: "center",
@@ -251,10 +250,11 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 5,
     marginBottom: "7%",
+    marginBottom: "20%",
   },
   btnTextoCadastrar: {
     textAlign: "center",
-    fontSize: 18,
+    fontSize: tela * 0.045,
     color: "#ffffff",
     fontFamily: fonts.bold,
   },

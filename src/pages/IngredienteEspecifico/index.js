@@ -8,37 +8,32 @@ import {
   Image,
   Dimensions,
   ScrollView,
-  TouchableOpacity,
   FlatList,
 } from "react-native";
 import fonts from "../../assets/fonts/fonts";
-import Header from "../../component/Header";
-import { getReceitasPorIngredientes } from "../../service/api";
+import {
+  getArraysIngredientes,
+  getReceitasPorIngredientes,
+} from "../../service/api";
 import { useNavigation } from "@react-navigation/native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ReceitasMiniatura from "../../component/ReceitasMiniatura";
 import IconBack from "../../component/IconBack";
 const tela = Dimensions.get("window").width;
 const SUBLINHADO_WIDTH = tela * 0.8;
 
 export default function IngredienteEspecifico({ route }) {
-  const item = route.params.item;
-  //console.log(item);
-  const navigation = useNavigation();
+  const itemArray = route.params;
 
-  function receitaEspecifica(item) {
-    navigation.navigate("Receita", { item });
-  }
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
         style={styles.imgFundo}
-        source={require("../../img/FundoIngredientes.png")}
+        source={require("../../img/FundoIng.png")}
       >
         <IconBack />
         <View style={styles.containerIng}>
-          <Image style={styles.imagemIng} source={{ uri: item.imagem }} />
           <View
             style={{
               borderBottomColor: "#F86E10",
@@ -48,16 +43,14 @@ export default function IngredienteEspecifico({ route }) {
               width: SUBLINHADO_WIDTH,
             }}
           >
-            <Text style={styles.titulo}>Receitas com {item.nome}</Text>
+            <Text style={styles.titulo}>Receitas Encontradas</Text>
           </View>
           <ScrollView>
             <FlatList
-              vertical
               showsVerticalScrollIndicator={false}
               numColumns={2}
-              data={getReceitasPorIngredientes(item.ingredienteId)}
+              data={getArraysIngredientes(itemArray)}
               renderItem={({ item }) => <ReceitasMiniatura data={item} />}
-              keyExtractor={(item) => String(item.receitaId)}
             />
           </ScrollView>
         </View>

@@ -2,18 +2,16 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import fonts from "../assets/fonts/fonts";
 
-import Home from "../pages/Home";
 import Perfil from "../pages/Perfil";
 import CriarReceita from "../pages/CriarReceita";
-//import Favoritos from "../pages/Favoritos";
 import Ingredientes from "../pages/Ingredientes";
 import MinhasReceitas from "../pages/MinhasReceitas";
 import { createStackNavigator } from "@react-navigation/stack";
 import TrocarSenha from "../pages/TrocarSenha";
-import Receita from "../component/Receita";
+import Receita from "../pages/Receita";
 import CameraApp from "../component/CameraApp";
 import IngredienteEspecifico from "../pages/IngredienteEspecifico";
-import Pesquisa from "../component/PesquisaNomeReceita";
+import ReceitasApp from "../pages/ReceitasApp";
 import UploadCamera from "../component/UploadCamera";
 import ReceitasSalvas from "../pages/ReceitasSalvas";
 
@@ -29,7 +27,7 @@ function Drawers() {
         drawerInactiveTintColor: "#7CB518",
         drawerLabelStyle: { fontFamily: fonts.bold, fontSize: 16 },
       }}
-      initialRouteName="Pesquisa"
+      initialRouteName="ReceitasApp"
     >
       <AppDrawer.Screen
         name="Perfil"
@@ -40,8 +38,8 @@ function Drawers() {
         }}
       />
       <AppDrawer.Screen
-        name="Pesquisa"
-        component={Pesquisa}
+        name="ReceitasApp"
+        component={ReceitasApp}
         options={{
           title: "Receitas",
           headerShown: false,

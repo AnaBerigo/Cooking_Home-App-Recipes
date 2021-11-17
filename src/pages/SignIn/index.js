@@ -17,6 +17,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import fonts from "../../assets/fonts/fonts";
 import { AuthContext } from "../../contexts/auth";
 const tela = Dimensions.get("window").width;
+const telaH = Dimensions.get("window").height;
 
 export default function SignIn() {
   const navigation = useNavigation();
@@ -45,17 +46,15 @@ export default function SignIn() {
             color="#F86E10"
           />
         </TouchableOpacity>
-        <View style={styles.viewTextoInformativo}>
-          <Text style={styles.textoInformativo}>
-            Insira suas informações para realizar o seu login
-          </Text>
-        </View>
+        <Text style={styles.textoInformativo}>
+          Insira suas informações para realizar o seu login
+        </Text>
         <KeyboardAvoidingView
           behavior={Platform.OS == "ios" ? "padding" : "height"}
           keyboardVerticalOffset={3}
           style={styles.containerInformacoes}
         >
-          <ScrollView vertical showsVerticalScrollIndicator={false}>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <Text style={styles.textoInput}>E-mail:</Text>
             <TextInput
               autoCorrect={true}
@@ -67,38 +66,36 @@ export default function SignIn() {
               style={styles.input}
             />
             <Text style={styles.textoInput}>Senha:</Text>
-            <View style={styles.areaInput}>
+            <View style={styles.areaInputSenha}>
               <TextInput
                 secureTextEntry={ocultar}
                 textContentType={"password"}
                 placeholder={"Digite sua senha"}
                 value={password}
                 onChangeText={(texto) => setPassword(texto)}
-                style={styles.input}
+                style={styles.inputSenha}
               />
               <TouchableOpacity
-                style={styles.icon}
+                style={styles.iconView}
                 onPress={() => setOcultar(!ocultar)}
               >
                 {ocultar ? (
                   <MaterialCommunityIcons
                     name="eye"
-                    size={25}
+                    size={tela * 0.06}
                     color="#F86E10"
                   />
                 ) : (
                   <MaterialCommunityIcons
                     name="eye-off"
-                    size={25}
+                    size={tela * 0.06}
                     color="#F86E10"
                   />
                 )}
               </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.botaoEntrar} onPress={handleLogin}>
-              <View style={styles.btnAreaEntrar}>
-                <Text style={styles.btnTextoEntrar}>Entrar</Text>
-              </View>
+              <Text style={styles.btnTextoEntrar}>Entrar</Text>
             </TouchableOpacity>
           </ScrollView>
         </KeyboardAvoidingView>
@@ -115,72 +112,78 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
   },
-  viewTextoInformativo: {
-    marginTop: "20%",
-    marginHorizontal: "5%",
-    marginBottom: "14%",
-  },
   textoInformativo: {
+    alignSelf: "center",
+    marginTop: "20%",
+    marginHorizontal: tela * 0.1,
+    marginBottom: "15%",
     fontFamily: fonts.bold,
-    fontSize: 22,
+    fontSize: tela * 0.055,
     color: "#333333",
   },
   containerInformacoes: {
-    marginLeft: "10%",
-    marginTop: "10%",
+    marginHorizontal: tela * 0.1,
+    height: telaH * 0.7,
   },
   textoInput: {
     color: "#9F9F9F",
-    fontSize: 16,
+    fontSize: tela * 0.038,
     fontFamily: fonts.bold,
+  },
+  input: {
+    color: "#333333",
+    width: tela * 0.77,
+    borderBottomColor: "#9F9F9F",
+    height: tela * 0.1,
+    borderBottomWidth: 1,
+    fontSize: tela * 0.038,
+    fontFamily: fonts.medium,
+    marginBottom: "5%",
+  },
+  inputSenha: {
+    width: tela * 0.7,
+    color: "#333333",
+    borderBottomColor: "#9F9F9F",
+    borderBottomWidth: 1,
+    fontSize: tela * 0.038,
+    fontFamily: fonts.medium,
+  },
+
+  areaInputSenha: {
+    flexDirection: "row",
+    height: tela * 0.1,
+  },
+  iconView: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: tela * 0.1,
+    borderBottomWidth: 1,
+    borderBottomColor: "#9F9F9F",
   },
   areaInput: {
     flexDirection: "row",
-    width: "90%",
-    borderRadius: 8,
-    height: 50,
-  },
-  input: {
-    width: "85%",
-    color: "#333333",
-    borderBottomColor: "#9F9F9F",
-    height: 50,
-    borderBottomWidth: 1,
-    fontSize: 16,
-    fontFamily: fonts.medium,
-    marginBottom: "10%",
-  },
-  icon: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: "12%",
-    height: 50,
-    borderBottomWidth: 1,
-    borderBottomColor: "#9F9F9F",
+    height: tela * 0.1,
   },
   botaoEntrar: {
-    marginTop: "20%",
-    alignItems: "center",
-    width: tela * 0.8,
-    height: tela * 0.15,
-    borderWidth: 2,
-    backgroundColor: "#F86E10",
-    borderColor: "#F86E10",
-    borderRadius: 15,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 6,
-  },
-  btnAreaEntrar: {
-    flex: 1,
+    alignSelf: "center",
     justifyContent: "center",
-    alignItems: "center",
+    width: tela * 0.7,
+    height: tela * 0.15,
+    backgroundColor: "#F86E10",
+    borderRadius: 15,
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    elevation: 5,
+    marginTop: "20%",
+    marginBottom: "20%",
   },
   btnTextoEntrar: {
-    fontSize: 18,
+    textAlign: "center",
+    fontSize: tela * 0.045,
+    color: "#ffffff",
     fontFamily: fonts.bold,
-    color: "#fff",
   },
   setaVoltar: {
     position: "absolute",
@@ -188,8 +191,6 @@ const styles = StyleSheet.create({
     top: 10,
     justifyContent: "center",
     alignItems: "center",
-    width: "15%",
-    height: 50,
     zIndex: 10,
   },
 });

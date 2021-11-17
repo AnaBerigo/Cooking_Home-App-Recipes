@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   Text,
@@ -6,57 +6,28 @@ import {
   StyleSheet,
   ImageBackground,
   Image,
-  TouchableOpacity,
   ScrollView,
   Dimensions,
   FlatList,
-  TouchableHighlight,
 } from "react-native";
 import fonts from "../../assets/fonts/fonts";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import HeaderReceitas from "../HeaderReceita";
+import HeaderReceitas from "../../component/HeaderReceita";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getTodosIngredientes } from "../../service/api";
 import Carousel, { Pagination } from "react-native-snap-carousel";
-import Favoritos from "../../pages/Favoritos";
 const tela = Dimensions.get("window").width;
 const SLIDER_WIDTH = tela * 0.87;
 const ITEM_WIDTH = tela * 0.87;
 
-export default function Receitas({ route }) {
+export default function Receita({ route }) {
   //parametros da receita selecionada
   const data = route.params.data;
   const modoPreparo = data.modoPreparo;
   const nomeReceita = data.nome;
   const tempoPreparo = data.tempoPreparo;
 
-  //const navigation = useNavigation();
-
-  //const [like, setLike] = useState(false);
-  //Carrossel de imagens
   const [index, setIndex] = useState(0);
   const isCarousel = useRef(null);
-
-  /*
-  console.log(like + "  like ");
-
-  useEffect(() => {
-    async function getStorage() {
-      const curtidasStorage = await AsyncStorage.getItem("curtidas");
-      if (curtidasStorage !== null) {
-        setLike(curtidasStorage);
-      }
-    }
-    getStorage();
-  }, []);
-
-  useEffect(() => {
-    async function saveStorage() {
-      await AsyncStorage.setItem("curtidas", JSON.stringify(like));
-    }
-    saveStorage();
-  }, [like]);
-*/
 
   const renderImage = ({ item }) => (
     <Image style={styles.imagem} source={{ uri: item }} />
@@ -84,7 +55,7 @@ export default function Receitas({ route }) {
       >
         <HeaderReceitas />
         <View style={styles.containerReceitas}>
-          <ScrollView vertical showsVerticalScrollIndicator={false}>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.carouselContainer}>
               <Carousel
                 ref={isCarousel}
@@ -125,21 +96,16 @@ export default function Receitas({ route }) {
               <MaterialCommunityIcons name="alarm" size={25} color="#F86E10" />
               <Text style={styles.desc}>{tempoPreparo}min</Text>
             </View>
-            <View style={styles.viewIngredientes}>
-              <Text style={styles.textIngredientes}>INGREDIENTES</Text>
-            </View>
+            <Text style={styles.textIngredientes}>INGREDIENTES</Text>
             <ScrollView>
               <FlatList
                 vertical
                 showsVerticalScrollIndicator={false}
                 data={ingredientsArray}
                 renderItem={renderIngredient}
-                keyExtractor={(item) => String(item.receitaId)}
               />
             </ScrollView>
-            <View style={styles.viewIngredientes}>
-              <Text style={styles.textIngredientes}>MODO DE PREPARO</Text>
-            </View>
+            <Text style={styles.textIngredientes}>MODO DE PREPARO</Text>
             <View>
               <Text style={styles.modoPreparo}>{modoPreparo}</Text>
             </View>
@@ -172,20 +138,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     paddingVertical: 8,
   },
-  iconeFav: {
-    position: "absolute",
-    right: 5,
-    bottom: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    width: tela * 0.1,
-    height: tela * 0.1,
-    backgroundColor: "#ffffff",
-    borderRadius: 40,
-    zIndex: 10,
-  },
   containerReceitas: {
-    flex: 1,
     marginHorizontal: "5%",
     marginTop: "1.5%",
     padding: 5,
@@ -225,21 +178,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
   },
-
-  viewIngredientes: {
+  textIngredientes: {
     backgroundColor: "#F86E10",
     marginVertical: "7%",
     marginLeft: "2.5%",
     width: tela * 0.5,
     height: tela * 0.15,
-    elevation: 5,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  textIngredientes: {
     color: "#ffffff",
     fontFamily: fonts.bold,
     textAlign: "center",
+    paddingVertical: "4%",
     fontSize: tela * 0.05,
   },
   ingredientes: {
@@ -259,6 +207,5 @@ const styles = StyleSheet.create({
     fontFamily: fonts.medium,
     color: "#7CB518",
     marginBottom: 15,
-    //textAlign: "center",
   },
 });

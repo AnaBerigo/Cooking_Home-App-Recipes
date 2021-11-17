@@ -120,19 +120,18 @@ export default function MinhasReceitas() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
   },
   imgFundo: {
     flex: 1,
     resizeMode: "cover",
-    zIndex: 1,
   },
   containerReceitas: {
-    flex: 1,
-    marginHorizontal: "5%",
+    marginHorizontal: "3%",
     marginTop: "5%",
     padding: 5,
-    borderTopEndRadius: 20,
-    borderTopStartRadius: 20,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
     backgroundColor: "rgba(255, 255, 255, 0.8)",
   },
 });

@@ -32,7 +32,7 @@ export default function ReceitasSalvas({ route }) {
       >
         <HeaderReceita />
         <View style={styles.containerReceitas}>
-          <ScrollView vertical showsVerticalScrollIndicator={false}>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.viewTitulo}>
               <Image style={styles.imagem} source={{ uri: imagem }} />
             </View>

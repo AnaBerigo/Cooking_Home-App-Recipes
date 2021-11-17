@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -6,19 +6,21 @@ import {
   TextInput,
   TouchableOpacity,
   SafeAreaView,
-  TouchableWithoutFeedback,
   ImageBackground,
   Keyboard,
+  ScrollView,
   Alert,
   KeyboardAvoidingView,
   Platform,
+  Dimensions,
 } from "react-native";
 import { useNavigation, Header } from "@react-navigation/native";
 import firebase from "../../service/firebaseConnection";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import fonts from "../../assets/fonts/fonts";
 import HeaderSenha from "../../component/HeaderSenha";
-import { ScrollView } from "react-native-gesture-handler";
+const tela = Dimensions.get("window").width;
+const telaH = Dimensions.get("window").height;
 
 export default function trocarSenha() {
   const [ocultar1, setOcultar1] = useState(true);
@@ -27,8 +29,6 @@ export default function trocarSenha() {
   const [confirmarNewPassword, setConfirmarNewPassword] = useState("");
   const user = firebase.auth().currentUser;
   const navigation = useNavigation();
-
-  console.log(newPassword);
 
   function handleSubmit() {
     Keyboard.dismiss();
@@ -76,7 +76,7 @@ export default function trocarSenha() {
           keyboardVerticalOffset={50}
           style={styles.containerInformacoes}
         >
-          <ScrollView vertical showsVerticalScrollIndicator={false}>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <Text style={styles.textoInput}>Nova Senha:</Text>
             <View style={styles.areaInput}>
               <TextInput
@@ -94,13 +94,13 @@ export default function trocarSenha() {
                 {ocultar1 ? (
                   <MaterialCommunityIcons
                     name="eye"
-                    size={25}
+                    size={tela * 0.06}
                     color="#F86E10"
                   />
                 ) : (
                   <MaterialCommunityIcons
                     name="eye-off"
-                    size={25}
+                    size={tela * 0.06}
                     color="#F86E10"
                   />
                 )}
@@ -123,28 +123,21 @@ export default function trocarSenha() {
                 {ocultar2 ? (
                   <MaterialCommunityIcons
                     name="eye"
-                    size={25}
+                    size={tela * 0.06}
                     color="#F86E10"
                   />
                 ) : (
                   <MaterialCommunityIcons
                     name="eye-off"
-                    size={25}
+                    size={tela * 0.06}
                     color="#F86E10"
                   />
                 )}
               </TouchableOpacity>
             </View>
-            <View style={styles.btnView}>
-              <TouchableOpacity
-                style={styles.botaoEntrar}
-                onPress={handleSubmit}
-              >
-                <View style={styles.btnAreaEntrar}>
-                  <Text style={styles.btnTextoEntrar}>Alterar Senha</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={styles.botaoEntrar} onPress={handleSubmit}>
+              <Text style={styles.btnTextoEntrar}>Alterar Senha</Text>
+            </TouchableOpacity>
           </ScrollView>
         </KeyboardAvoidingView>
       </ImageBackground>
@@ -159,68 +152,57 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
   },
+  containerInformacoes: {
+    marginTop: "20%",
+    marginHorizontal: tela * 0.1,
+    height: telaH * 0.7,
+  },
   textoInput: {
     marginTop: "10%",
     color: "#9F9F9F",
-    fontSize: 16,
+    fontSize: tela * 0.038,
     fontFamily: fonts.bold,
   },
-  containerInformacoes: {
-    marginTop: "10%",
-    marginLeft: "10%",
-  },
-  areaInput: {
-    marginTop: "2%",
-    flexDirection: "row",
-    width: "90%",
-    borderRadius: 8,
-    height: 50,
-  },
   input: {
-    width: "85%",
+    width: tela * 0.7,
+    height: tela * 0.12,
     color: "#333333",
     borderBottomColor: "#9F9F9F",
-    height: 50,
     borderBottomWidth: 1,
-    fontSize: 16,
+    fontSize: tela * 0.038,
     fontFamily: fonts.medium,
-    marginBottom: "10%",
+  },
+  areaInput: {
+    flexDirection: "row",
+    //height: tela * 0.11,
   },
   icon: {
     justifyContent: "center",
     alignItems: "center",
-    width: "12%",
-    height: 50,
+    width: tela * 0.11,
+    height: tela * 0.12,
     borderBottomWidth: 1,
     borderBottomColor: "#9F9F9F",
   },
-  btnView: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: "23%",
-  },
   botaoEntrar: {
-    marginRight: "14%",
-    width: "85%",
-    height: 56,
-    borderWidth: 2,
-    backgroundColor: "rgba(255, 255, 255, 0.7)",
-    borderColor: "#F86E10",
-    borderRadius: 15,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 6,
-  },
-  btnAreaEntrar: {
-    flex: 1,
+    alignSelf: "center",
     justifyContent: "center",
-    alignItems: "center",
+    width: tela * 0.7,
+    height: tela * 0.15,
+    backgroundColor: "#F86E10",
+    borderRadius: 15,
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    elevation: 5,
+    marginTop: "20%",
+    marginBottom: "20%",
   },
   btnTextoEntrar: {
-    fontSize: 18,
+    textAlign: "center",
+    fontSize: tela * 0.045,
+    color: "#ffffff",
     fontFamily: fonts.bold,
-    color: "#F86E10",
   },
 });

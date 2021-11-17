@@ -22,13 +22,6 @@ export default function ReceitasMiniatura({ data }) {
     navigation.navigate("Receita", { data });
   }
 
-  function filterDesc(desc) {
-    if (desc.length < 20) {
-      return desc;
-    }
-    return `${desc.substring(0, 18)}...`;
-  }
-
   return (
     <TouchableOpacity style={styles.receitas} onPress={receitaEspecifica}>
       <Image
@@ -37,7 +30,7 @@ export default function ReceitasMiniatura({ data }) {
         }}
         style={styles.imagem}
       />
-      <Text style={styles.titulo}>{filterDesc(nomeReceita)}</Text>
+      <Text style={styles.titulo}>{nomeReceita}</Text>
       <View
         style={{
           flexDirection: "row",
@@ -58,17 +51,17 @@ export default function ReceitasMiniatura({ data }) {
 }
 const styles = StyleSheet.create({
   receitas: {
-    flex: 1,
-    marginVertical: 12,
-    marginHorizontal: 10,
-    paddingBottom: 15,
+    width: tela * 0.455,
+    marginVertical: "3%",
+    marginHorizontal: "2%",
+    paddingBottom: "4%",
     backgroundColor: "rgba(255,255,255,0.8)",
   },
   titulo: {
     fontFamily: fonts.semibold,
     textAlign: "center",
     color: "#F86E10",
-    fontSize: 15,
+    fontSize: tela * 0.04,
     marginVertical: 12,
     paddingHorizontal: 14,
   },

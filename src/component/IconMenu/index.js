@@ -3,8 +3,6 @@ import { TouchableOpacity, Dimensions, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 const tela = Dimensions.get("window").width;
-const WIDTH_icone = tela * 0.1;
-const HEIGTH_icone = tela * 0.1;
 
 export default function IconMenu() {
   const navigation = useNavigation();
@@ -24,12 +22,12 @@ const styles = StyleSheet.create({
     top: 10,
     justifyContent: "center",
     alignItems: "center",
-    width: WIDTH_icone,
-    height: HEIGTH_icone,
+    width: tela * 0.1,
+    height: tela * 0.1,
     backgroundColor: "#ffffff",
-    borderWidth: 1.5,
-    borderColor: "#7CB518",
-    borderRadius: 30,
+    //borderWidth: 1.5,
+    //borderColor: "#7CB518",
+    borderRadius: 100,
     zIndex: 10,
   },
 });
