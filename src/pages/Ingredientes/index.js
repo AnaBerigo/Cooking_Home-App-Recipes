@@ -11,10 +11,10 @@ import {
   TouchableOpacity,
   Dimensions,
   View,
+  ScrollView,
   TextInput,
 } from "react-native";
 import fonts from "../../assets/fonts/fonts";
-import { getArraysIngredientes } from "../../service/api";
 import { ingredientes } from "../../service/receitas";
 import { useNavigation } from "@react-navigation/native";
 import IconMenu from "../../component/IconMenu";
@@ -28,48 +28,38 @@ export default function Ingredientes() {
   const [pesquisa, setPesquisa] = useState("");
   const [list, setList] = useState(ingredientes);
 
+  function filterDesc(desc) {
+    if (desc.length < 15) {
+      return desc;
+    }
+    return `${desc.substring(0, 13)}...`;
+  }
+
   const renderIngredient = ({ item }) => (
     <TouchableOpacity
       style={styles.containerIng}
       onPress={() => inserirItem(item)}
     >
       <Image style={styles.imagem} source={{ uri: item.imagem }} />
-      <Text style={styles.titulo}>{item.nome}</Text>
+      <Text style={styles.titulo}>{filterDesc(item.nome)}</Text>
     </TouchableOpacity>
   );
 
   const renderArrayIngredient = ({ item }) => (
-    <TouchableOpacity
-      style={styles.containerArrayIng}
-      onPress={() => removerItem(item)}
-    >
+    <View style={styles.containerArrayIng}>
       <MaterialCommunityIcons
         name="checkbox-marked-outline"
         size={25}
         color="#F86E10"
       />
-      <Text style={styles.tituloArray}>{item.nome}</Text>
-    </TouchableOpacity>
+      <Text style={styles.tituloArray}>{filterDesc(item.nome)}</Text>
+    </View>
   );
-  /*
-  
-  */
-
-  function removerItem(item) {
-    if (newItem.includes(item)) {
-      newItem.splice(newItem.indexOf(item), 1);
-    }
-
-    //console.log(newItem);
-  }
 
   function inserirItem(item) {
     if (!newItem.includes(item)) {
       setNewItem([...newItem, item]);
-      //newItem.push(item);
-      //console.log(newItem);
     }
-    //console.log("adicionei");
   }
 
   useEffect(() => {
@@ -93,51 +83,53 @@ export default function Ingredientes() {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
           <View>
             <IconMenu />
-
-            <View style={styles.pesquisa}>
-              <TextInput
-                placeholder={"Qual(is) ingrediente(s) deseja?"}
-                autoCorrect={true}
-                textContentType={"name"}
-                value={pesquisa}
-                onChangeText={(texto) => setPesquisa(texto)}
-                style={styles.input}
-              />
-            </View>
-            <View style={styles.ArrayIng}>
-              <FlatList
-                showsVerticalScrollIndicator={false}
-                numColumns={2}
-                data={newItem}
-                renderItem={renderArrayIngredient}
-              />
-              <View
-                style={{ flexDirection: "row", justifyContent: "space-around" }}
-              >
-                <TouchableOpacity
-                  onPress={() => setNewItem([])}
-                  style={styles.botao}
-                >
-                  <Text style={styles.btnTexto}>Limpar Lista</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate("IngredienteEspecifico", newItem)
-                  }
-                  style={styles.botao}
-                >
-                  <Text style={styles.btnTexto}>Mostrar Receitas</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <FlatList
-              style={styles.FlatIng}
-              showsVerticalScrollIndicator={false}
-              numColumns={3}
-              data={list}
-              renderItem={renderIngredient}
-              keyExtractor={(item) => String(item.ingredienteId)}
+            <TextInput
+              placeholder={"Qual(is) ingrediente(s) deseja?"}
+              autoCorrect={true}
+              textContentType={"name"}
+              value={pesquisa}
+              onChangeText={(texto) => setPesquisa(texto)}
+              style={styles.pesquisa}
             />
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={styles.ArrayIng}>
+                <FlatList
+                  showsVerticalScrollIndicator={false}
+                  numColumns={2}
+                  data={newItem}
+                  renderItem={renderArrayIngredient}
+                />
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={() => setNewItem([])}
+                    style={styles.botao}
+                  >
+                    <Text style={styles.btnTexto}>Limpar Lista</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate("IngredienteEspecifico", newItem)
+                    }
+                    style={styles.botao}
+                  >
+                    <Text style={styles.btnTexto}>Mostrar Receitas</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <FlatList
+                style={styles.FlatIng}
+                showsVerticalScrollIndicator={false}
+                numColumns={3}
+                data={list}
+                renderItem={renderIngredient}
+                keyExtractor={(item) => String(item.ingredienteId)}
+              />
+            </ScrollView>
           </View>
         </TouchableWithoutFeedback>
       </ImageBackground>
@@ -152,6 +144,20 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
   },
+  pesquisa: {
+    backgroundColor: "rgba(255, 255, 255, 0.7)",
+    width: tela * 0.8,
+    borderRadius: 10,
+    height: 50,
+    borderWidth: 2,
+    borderColor: "#F86E10",
+    marginLeft: "15%",
+    marginVertical: "3%",
+    fontSize: tela * 0.045,
+    fontFamily: fonts.medium,
+    color: "#333333",
+    paddingHorizontal: "3%",
+  },
   ArrayIng: {
     marginBottom: "3%",
     marginHorizontal: "5%",
@@ -161,8 +167,14 @@ const styles = StyleSheet.create({
     borderColor: "#F86E10",
     borderWidth: 2,
   },
+  containerArrayIng: {
+    flex: 1,
+    paddingHorizontal: "4%",
+    alignItems: "center",
+    flexDirection: "row",
+    marginTop: "2%",
+  },
   botao: {
-    //alignSelf: "center",
     justifyContent: "center",
     width: tela * 0.4,
     height: tela * 0.15,
@@ -174,20 +186,32 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 6,
     elevation: 5,
-    marginTop: "1%",
+    marginTop: "5%",
   },
   btnTexto: {
     textAlign: "center",
-    fontSize: 18,
+    fontSize: tela * 0.045,
     color: "#ffffff",
     fontFamily: fonts.bold,
   },
   FlatIng: {
-    borderRadius: 55,
-    marginHorizontal: "2%",
+    borderTopLeftRadius: 55,
+    borderTopRightRadius: 55,
     backgroundColor: "rgba(255, 255, 255, 0.8)",
-    marginBottom: "10%",
-    paddingVertical: "2%",
+    marginBottom: "15%",
+  },
+  containerIng: {
+    width: tela * 0.3,
+    marginVertical: "3%",
+    marginHorizontal: "1.5%",
+    paddingBottom: "4%",
+    alignItems: "center",
+  },
+  imagem: {
+    width: tela * 0.22,
+    height: tela * 0.22,
+    borderRadius: 100,
+    marginBottom: 10,
   },
   titulo: {
     fontFamily: fonts.semibold,
@@ -199,42 +223,5 @@ const styles = StyleSheet.create({
     fontFamily: fonts.semibold,
     color: "#7CB518",
     textAlign: "center",
-  },
-  imagem: {
-    width: tela * 0.22,
-    height: tela * 0.22,
-    borderRadius: 100,
-    marginBottom: 10,
-  },
-  containerIng: {
-    flex: 1,
-    alignItems: "center",
-    margin: 12,
-  },
-  containerArrayIng: {
-    flex: 1,
-    alignItems: "center",
-    margin: 6,
-    flexDirection: "row",
-  },
-  pesquisa: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    flexDirection: "row",
-    width: tela * 0.8,
-    borderRadius: 10,
-    height: 50,
-    borderWidth: 2,
-    borderColor: "#F86E10",
-    marginLeft: "15%",
-    marginVertical: "3%",
-  },
-  input: {
-    fontSize: 16,
-    fontFamily: fonts.medium,
-    width: "85%",
-    height: 50,
-    color: "#333333",
   },
 });
