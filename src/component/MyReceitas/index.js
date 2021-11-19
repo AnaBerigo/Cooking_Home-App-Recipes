@@ -27,10 +27,10 @@ export default function MyReceitas({ data, deleteItem }) {
   }
 
   function filterDesc(desc) {
-    if (desc.length < 20) {
+    if (desc.length < 18) {
       return desc;
     }
-    return `${desc.substring(0, 18)}...`;
+    return `${desc.substring(0, 16)}...`;
   }
 
   return (
@@ -44,8 +44,38 @@ export default function MyReceitas({ data, deleteItem }) {
         style={styles.imagem}
       />
       <Text style={styles.titulo}>{filterDesc(nomeReceita)}</Text>
-      <Text style={styles.titulo}>{tempoPreparo}</Text>
-      <Text style={styles.desc}>{date}</Text>
+      <View
+        style={{
+          //justifyContent: "center",
+          marginLeft: "15%",
+          flexDirection: "row",
+          marginBottom: "5%",
+        }}
+      >
+        <MaterialCommunityIcons
+          name="alarm"
+          size={18}
+          color="#F86E10"
+          style={styles.icons}
+        />
+        <Text style={styles.tempo}>{filterDesc(tempoPreparo)}</Text>
+      </View>
+      <View
+        style={{
+          marginBottom: "10%",
+          marginLeft: "15%",
+          flexDirection: "row",
+        }}
+      >
+        <MaterialCommunityIcons
+          name="calendar"
+          size={18}
+          color="#F86E10"
+          style={styles.icons}
+        />
+        <Text style={styles.data}>{date}</Text>
+      </View>
+
       <TouchableOpacity
         onPress={() => deleteItem(data)}
         style={styles.iconeLixo}
@@ -61,32 +91,45 @@ export default function MyReceitas({ data, deleteItem }) {
 }
 const styles = StyleSheet.create({
   receitas: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginVertical: 10,
-    marginHorizontal: 10,
-    backgroundColor: "rgba(255,255,255,0.9)",
+    width: tela * 0.455,
+    marginVertical: "3%",
+    marginHorizontal: "2%",
+    paddingBottom: "4%",
+    backgroundColor: "rgba(255,255,255,0.85)",
   },
   titulo: {
     fontFamily: fonts.semibold,
+    textAlign: "center",
     color: "#F86E10",
-    fontSize: 18,
-    marginBottom: 8,
+    fontSize: tela * 0.04,
+    marginVertical: 12,
+    paddingHorizontal: 14,
   },
-  desc: {
+  icons: {
+    marginRight: "10%",
+  },
+  tempo: {
+    fontFamily: fonts.semibold,
+    textAlign: "center",
+    color: "#7CB518",
+    fontSize: tela * 0.035,
+  },
+  data: {
     fontFamily: fonts.medium,
-    color: "#F86E10",
+    textAlign: "center",
+    color: "#7CB518",
+    fontSize: tela * 0.035,
   },
   iconeLixo: {
     position: "absolute",
-    right: 10,
-    bottom: 10,
-    borderRadius: 30,
+    right: 3,
+    bottom: 3,
     zIndex: 10,
   },
   imagem: {
-    width: "100%",
+    alignSelf: "center",
+    width: "80%",
     height: tela * 0.35,
+    borderRadius: 100,
   },
 });

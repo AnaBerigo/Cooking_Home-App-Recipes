@@ -54,8 +54,8 @@ export default function Receita({ route }) {
         source={require("../../img/FundoFolha.png")}
       >
         <HeaderReceitas />
-        <View style={styles.containerReceitas}>
-          <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.containerReceitas}>
             <View style={styles.carouselContainer}>
               <Carousel
                 ref={isCarousel}
@@ -97,20 +97,18 @@ export default function Receita({ route }) {
               <Text style={styles.desc}>{tempoPreparo}min</Text>
             </View>
             <Text style={styles.textIngredientes}>INGREDIENTES</Text>
-            <ScrollView>
-              <FlatList
-                vertical
-                showsVerticalScrollIndicator={false}
-                data={ingredientsArray}
-                renderItem={renderIngredient}
-              />
-            </ScrollView>
+            <FlatList
+              vertical
+              showsVerticalScrollIndicator={false}
+              data={ingredientsArray}
+              renderItem={renderIngredient}
+            />
             <Text style={styles.textIngredientes}>MODO DE PREPARO</Text>
             <View>
               <Text style={styles.modoPreparo}>{modoPreparo}</Text>
             </View>
-          </ScrollView>
-        </View>
+          </View>
+        </ScrollView>
       </ImageBackground>
     </SafeAreaView>
   );

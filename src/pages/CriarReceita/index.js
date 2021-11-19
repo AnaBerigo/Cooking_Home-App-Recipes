@@ -28,7 +28,7 @@ const tela = Dimensions.get("window").width;
 export default function CriarReceita() {
   const navigation = useNavigation();
   const imagem =
-    "https://user-images.githubusercontent.com/74029212/142089632-d8baef95-e4eb-4cec-92c5-1b202749e67e.png";
+    "https://user-images.githubusercontent.com/74029212/142555629-e6099bfc-79da-4889-a341-66e811dca71d.png";
   const [ingredientes, setIngredientes] = useState("");
   const [avatar, setAvatar] = useState();
   const [modoPreparo, setModoPreparo] = useState("");
@@ -92,7 +92,6 @@ export default function CriarReceita() {
     let uid = usuario.uid;
     let key = await firebase.database().ref("receitas").child(uid).push().key;
 
-    console.log(imagem);
     //cadastrei a receita no banco de dados
     await firebase
       .database()
@@ -143,7 +142,7 @@ export default function CriarReceita() {
                 source={{
                   uri: avatar
                     ? avatar.uri
-                    : "https://user-images.githubusercontent.com/74029212/142089632-d8baef95-e4eb-4cec-92c5-1b202749e67e.png",
+                    : "https://user-images.githubusercontent.com/74029212/142555629-e6099bfc-79da-4889-a341-66e811dca71d.png",
                 }}
                 style={styles.avatar}
               />
@@ -266,10 +265,9 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   avatar: {
-    marginTop: "10%",
-    marginLeft: "10%",
-    width: tela * 0.23,
-    height: tela * 0.23,
+    width: tela * 0.26,
+    height: tela * 0.26,
+    borderRadius: 7,
   },
   botaoCadastrar: {
     alignSelf: "center",
