@@ -9,7 +9,6 @@ import MinhasReceitas from "../pages/MinhasReceitas";
 import { createStackNavigator } from "@react-navigation/stack";
 import TrocarSenha from "../pages/TrocarSenha";
 import Receita from "../pages/Receita";
-import CameraApp from "../component/CameraApp";
 import IngredienteEspecifico from "../pages/IngredienteEspecifico";
 import ReceitasApp from "../pages/ReceitasApp";
 import UploadCamera from "../component/UploadCamera";
@@ -88,14 +87,6 @@ export default function AppRoutes() {
       <AppStack.Screen
         name="Receita"
         component={Receita}
-        options={{
-          title: "",
-          headerShown: false,
-        }}
-      />
-      <AppStack.Screen
-        name="CameraApp"
-        component={CameraApp}
         options={{
           title: "",
           headerShown: false,
