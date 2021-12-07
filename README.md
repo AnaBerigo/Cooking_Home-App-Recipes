@@ -40,8 +40,8 @@
 <!-- Sobre o projeto -->
 
 <h2>Sobre</h2>
-Essa é uma aplicação desenvolvida com o objetivo de apresentar para o meu TCC, além de aperfeiçoar os conhecimentos em React Native.<br>
-O intuito desse projeto é de mostrar as receitas do próprio aplicativo, criar suas próprias receitas e filtrar ingredientes<br>
+Essa é uma aplicação desenvolvida com o objetivo de apresentar para o meu TCC, além de aperfeiçoar os conhecimentos em React Native.
+O intuito desse projeto é mostrar receitas do próprio aplicativo, possibilitar o usuário a criar suas próprias receitas e filtra-las através de ingredientes selecionados por ele.<br>
 
 <!-- Protótipo do figma -->
 
