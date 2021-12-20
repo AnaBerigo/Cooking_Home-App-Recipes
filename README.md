@@ -1,6 +1,5 @@
 
-<!-- https://user-images.githubusercontent.com/74029212/129305717-abfd742b-6ed5-417d-8efb-db04959eacee.png -->
-<!-- https://user-images.githubusercontent.com/74029212/129305728-a25e2c38-dbed-48ff-8cf5-4a104bed5d0b.png -->
+
 
 <h1 align="center"> CookingHome_Expo </h1>
 
@@ -32,11 +31,11 @@
     <img alt="EXPO" height=27 src="https://img.shields.io/badge/%20Expo-4630EB.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000" />
   </a>
 </p>
-<!-- 
 <p align="center">
-  <img alt="QrCode_CookingHome" src="https://user-images.githubusercontent.com/74029212/142224321-d0763733-7b8b-4e10-9398-d7434f18396e.png" />
+  <img  height="500" width="250" alt="TelaReceitas_CookingHome" src="https://user-images.githubusercontent.com/74029212/146832115-981e543b-9a3d-464e-9aaf-f378926dd757.png" />
+  <img height="500" width="250" alt="TelaReceitaEspecífica_CookingHome" src="https://user-images.githubusercontent.com/74029212/146832243-9f073736-ed53-4282-96d8-f33b05eef7ce.png" />
+  <img height="500" width="250" alt="TelaIngredientes_CookingHome" src="https://user-images.githubusercontent.com/74029212/146832232-aa38fbf1-ecda-4103-98db-cbff28aa6ba4.png" />
 </p>
--->
 <!-- Sobre o projeto -->
 
 <h2>Sobre</h2>
@@ -46,7 +45,7 @@ O intuito desse projeto é mostrar receitas do próprio aplicativo, possibilitar
 <!-- Protótipo do figma -->
 
 <h2>Visualização do protótipo</h2>
-<a target="_blank" href="https://www.figma.com/proto/XB7dPgKvIwGGrjo3bqHeJm/TCC?node-id=22%3A4&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=22%3A4&show-proto-sidebar=1">
+<a target="_blank" href="https://www.figma.com/community/file/1053774062149273119/CookingHome---Trabalho-de-Conclus%C3%A3o-de-Curso">
   <img alt="Figma protótipo" src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"
 </a>
   
@@ -100,17 +99,6 @@ Será necessário instalar as seguintes bibliotecas no computador/projeto, para 
   <code> expo install axios </code><br/>
   <code> expo install expo-constants </code><br/>
   <code> yarn add react-native-elements </code><br/>
-  <!--<code>  </code><br/>
-  <code>  </code><br/>
-  <code>  </code><br/>
-  <code>  </code><br/>
-  <code>  </code><br/>
-  <code>  </code><br/>
-  <code>  </code><br/>
-  <code>  </code><br/>
-  <code>  </code><br/>
-  <code>  </code><br/>
-  <code>  </code><br/> -->
   
   
 <!-- Paleta de cores -->
